@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { ProyectosModel } from '../Proyectos/Proyectos.js';
-import { UsuariosModel } from '../Usuarios/Usuarios.js';
+import { ModeloProyectos } from '../Proyectos/Proyectos.js';
+import { ModeloUsuarios } from '../Usuarios/Usuarios.js';
 
 const { Schema, model } = mongoose;
 
@@ -20,16 +20,16 @@ const avanceSchema = new Schema({
   ],
   proyecto: {
     type: Schema.Types.ObjectId,
-    ref: ProyectosModel,
+    ref: ModeloProyectos,
     required: true,
   },
   creadoPor: {
     type: Schema.Types.ObjectId,
-    ref: UsuariosModel,
+    ref: ModeloUsuarios,
     required: true,
   },
 });
 
-const AvancesModel = model('Avances', avanceSchema);
+const ModeloAvances = model('Avances', avanceSchema);
 
-export { AvancesModel };
+export { ModeloAvances };

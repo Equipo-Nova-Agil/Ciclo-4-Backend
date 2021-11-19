@@ -1,8 +1,24 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
-
 const usuarioSchema = new Schema({
+
+  nombre: {
+    type: String,
+    required: true,
+  },
+
+  apellido: {
+    type: String,
+    required: true,
+  },
+
+  identificacion: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+
   correo: {
     type: String,
     required: true,
@@ -11,23 +27,11 @@ const usuarioSchema = new Schema({
       validator: (email) => {
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
       },
-      
+     
       message: 'Formato de Correo Electrónico Incorrecto.',
     },
   },
-  identificacion: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  nombre: {
-    type: String,
-    required: true,
-  },
-  apellido: {
-    type: String,
-    required: true,
-  },
+  
   rol: {
     type: String,
     required: true,
@@ -40,6 +44,6 @@ const usuarioSchema = new Schema({
   },
 });
 
-const UsuariosModel = model('Usuarios', usuarioSchema);
+const ModeloUsuarios = model('Usuarios', usuarioSchema);
 
-export { UsuariosModel };
+export { ModeloUsuarios };

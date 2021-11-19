@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
-import { ObjetivosModel } from '../Objetivos/Objetivos.js';
-import { UsuariosModel } from '../Usuarios/Usuarios.js';
+import { ModeloObjetivos } from '../Objetivos/Objetivos.js';
+import { ModeloUsuarios } from '../Usuarios/Usuarios.js';
 const { Schema, model } = mongoose;
+
 
 
 const proyectoSchema = new Schema(
@@ -24,18 +25,18 @@ const proyectoSchema = new Schema(
     },
     estado: {
       type: String,
-      enum: ['Activo', 'Inactivo'],
-      default: 'Inactivo',
+      enum: ['ACTIVO', 'INACTIVO'],
+      default: 'INACTIVO',
     },
     fase: {
       type: String,
-      enum: ['Iniciado', 'Desarrollo', 'Terminado', 'Nulo'],
-      default: 'Nulo',
+      enum: ['INICIADO', 'DESARROLLO', 'TERMINADO', 'NULO'],
+      default: 'NULO',
     },
     lider: {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: UsuariosModel,
+      ref: ModeloUsuarios,
     },
     objetivos: [
       {
@@ -45,7 +46,7 @@ const proyectoSchema = new Schema(
         },
         tipo: {
           type: String,
-          enum: ['General', 'Especifico'],
+          enum: ['GENERAL', 'ESPECIFICO'],
           required: true,
         },
       },
@@ -69,6 +70,6 @@ proyectoSchema.virtual('inscripciones', {
   foreignField: 'proyecto',
 });
 
-const ProyectosModel = model('Proyectos', proyectoSchema);
+const ModeloProyectos = model('Proyectos', proyectoSchema);
 
-export { ProyectosModel };
+export { ModeloProyectos };

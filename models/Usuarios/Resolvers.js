@@ -1,20 +1,20 @@
-import { UsuariosModel } from './Usuarios.js';
+import { ModeloUsuarios } from './Usuarios.js';
 
 const resolversUsuario = {
   Query: {
     Usuarios: async (parent, args) => {
       console.log('parent usuario', parent);
-      const usuarios = await UsuariosModel.find();
+      const usuarios = await ModeloUsuarios.find();
       return usuarios;
     },
     Usuario: async (parent, args) => {
-      const usuario = await UsuariosModel.findOne({ _id: args._id });
+      const usuario = await ModeloUsuarios.findOne({ _id: args._id });
       return usuario;
     },
   },
   Mutation: {
     crearUsuario: async (parent, args) => {
-      const usuarioCreado = await UsuariosModel.create({
+      const usuarioCreado = await ModeloUsuarios.create({
         nombre: args.nombre,
         apellido: args.apellido,
         identificacion: args.identificacion,
@@ -29,23 +29,27 @@ const resolversUsuario = {
       return usuarioCreado;
     },
     editarUsuario: async (parent, args) => {
-      const usuarioEditado = await UsuariosModel.findByIdAndUpdate(args._id, {
-        nombre: args.nombre,
-        apellido: args.apellido,
-        identificacion: args.identificacion,
-        correo: args.correo,
-        rol: args.rol,
-        estado: args.estado,
-      });
+      const usuarioEditado = await ModeloUsuarios.findByIdAndUpdate(
+        args._id,
+        {
+          nombre: args.nombre,
+          apellido: args.apellido,
+          identificacion: args.identificacion,
+          correo: args.correo,
+          rol: args.rol,
+          estado: args.estado,
+        },
+        { new: true }
+      );
 
       return usuarioEditado;
     },
     eliminarUsuario: async (parent, args) => {
       if (Object.keys(args).includes('_id')) {
-        const usuarioEliminado = await UsuariosModel.findOneAndDelete({ _id: args._id });
+        const usuarioEliminado = await ModeloUsuarios.findOneAndDelete({ _id: args._id });
         return usuarioEliminado;
       } else if (Object.keys(args).includes('correo')) {
-        const usuarioEliminado = await UsuariosModel.findOneAndDelete({ correo: args.correo });
+        const usuarioEliminado = await ModeloUsuarios.findOneAndDelete({ correo: args.correo });
         return usuarioEliminado;
       }
     },

@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
-
 const objetivoSchema = new Schema({
   descripcion: {
     type: String,
@@ -9,11 +8,11 @@ const objetivoSchema = new Schema({
   },
   tipo: {
     type: String,
-    enum: ['General', 'Especifico'],
+    enum: ['GENERAL', 'ESPECIFICO'],
     required: true,
   },
 });
 
-const ObjetivosModel = model('Objetivos', objetivoSchema);
+const ModeloObjetivos = model('Objetivos', objetivoSchema);
 
-export { ObjetivosModel };
+export { ModeloObjetivos };

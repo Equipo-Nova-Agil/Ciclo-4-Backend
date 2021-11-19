@@ -1,15 +1,14 @@
 import mongoose from 'mongoose';
-// import { Enum_EstadoInscripcion } from '../enums/enums.js';
-import { ProyectosModel } from '../Proyectos/Proyectos.js';
-import { UsuariosModel } from '../Usuarios/Usuarios.js';
+import { ModeloProyectos } from '../Proyectos/Proyectos.js';
+import { ModeloUsuarios } from '../Usuarios/Usuarios.js';
 
 const { Schema, model } = mongoose;
 
 const inscripcionSchema = new Schema({
   estado: {
     type: String,
-    enum: ['Aceptado', 'Rechazado', 'Pendiente'],
-    default: 'Pendiente',
+    enum: ['ACEPTADO', 'RECHAZADO', 'PENDIENTE'],
+    default: 'PENDIENTE',
     required: true,
   },
   fechaIngreso: {
@@ -22,16 +21,16 @@ const inscripcionSchema = new Schema({
   },
   proyecto: {
     type: Schema.Types.ObjectId,
-    ref: ProyectosModel,
+    ref: ModeloProyectos,
     required: true,
   },
   estudiante: {
     type: Schema.Types.ObjectId,
-    ref: UsuariosModel,
+    ref: ModeloUsuarios,
     required: true,
   },
 });
 
-const InscripcionesModel = model('Inscripciones', inscripcionSchema);
+const ModeloInscripciones = model('Inscripciones', inscripcionSchema);
 
-export { InscripcionesModel };
+export { ModeloInscripciones };
