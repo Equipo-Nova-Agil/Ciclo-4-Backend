@@ -1,7 +1,9 @@
 {
-  "name": "gestion-proyectos-mintic-back",
+  "name": "proyectorio-backed",
   "version": "1.0.0",
   "main": "index.js",
+  "repository": "https://github.com/Equipo-Nova-Agil/Ciclo-4-Backend.git",
+  "author": "Ezequiel López Ríos <lopezriosezequiel@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
