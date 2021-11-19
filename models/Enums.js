@@ -2,38 +2,38 @@ import { gql } from 'apollo-server-express';
 
 const tiposEnums = gql`
   enum Enum_EstadoUsuario {
-    Pendiente
-    Autorizado
-    No_Autorizado
+    PENDIENTE
+    AUTORIZADO
+    NO_AUTORIZADO
   }
 
   enum Enum_Rol {
-    Estudiante
-    Lider
-    Administrador
+    ESTUDIANTE
+    LIDER
+    ADMINISTRADOR
   }
 
   enum Enum_EstadoProyecto {
-    Activo
-    Inactivo
+    ACTIVO
+    INACTIVO
   }
 
   enum Enum_FaseProyecto {
-    Iniciado
-    Desarrollo
-    Terminado
-    Nulo
+    INICIADO
+    DESARROLLO
+    TERMINADO
+    NULO
   }
 
   enum Enum_TipoObjetivo {
-    General
-    Especifico
+    GENERAL
+    ESPECIFICO
   }
 
   enum Enum_EstadoInscripcion {
-    Aceptado
-    Rechazado
-    Pendiente
+    ACEPTADO
+    RECHAZADO
+    PENDIENTE
   }
 `;
 

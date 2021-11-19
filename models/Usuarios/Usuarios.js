@@ -31,12 +31,12 @@ const usuarioSchema = new Schema({
   rol: {
     type: String,
     required: true,
-    enum: ['Estudiante', 'Lider', 'Administrador'],
+    enum: ['ESTUDIANTE', 'LIDER', 'ADMINISTRADOR'],
   },
   estado: {
     type: String,
-    enum: ['Pendiente', 'Autorizado', 'No_Autorizado'],
-    default: 'Pendiente',
+    enum: ['PENDIENTE', 'AUTORIZADO', 'NO_AUTORIZADO'],
+    default: 'PENDIENTE',
   },
 });
 
