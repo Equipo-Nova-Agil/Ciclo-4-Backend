@@ -15,7 +15,7 @@ const usuarioSchema = new Schema({
       message: 'Formato de Correo Electrónico Incorrecto.',
     },
   },
-  documento: {
+  identificacion: {
     type: String,
     required: true,
     unique: true,
