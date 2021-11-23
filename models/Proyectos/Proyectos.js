@@ -1,9 +1,6 @@
 import mongoose from 'mongoose';
-import { ModeloObjetivos } from '../Objetivos/Objetivos.js';
 import { ModeloUsuarios } from '../Usuarios/Usuarios.js';
 const { Schema, model } = mongoose;
-
-
 
 const proyectoSchema = new Schema(
   {
@@ -45,29 +42,29 @@ const proyectoSchema = new Schema(
       ref: ModeloUsuarios,
     },
 
-    objetivosGenerales: {
-      type: String,
-      required: true,
-    },
+    // objetivosGenerales: {
+    //   type: String,
+    //   required: true,
+    // },
 
-    objetivosEspecificos: {
-      type: String,
-      required: true,
-    },
+    // objetivosEspecificos: {
+    //   type: String,
+    //   required: true,
+    // },
 
-    // objetivos: [
-    //   {
-    //     descripcion: {
-    //       type: String,
-    //       required: true,
-    //     },
-    //     tipo: {
-    //       type: String,
-    //       enum: ['GENERAL', 'ESPECIFICO'],
-    //       required: true,
-    //     },
-    //   },
-    // ],
+     objetivos: [
+       {
+         descripcion: {
+           type: String,
+           required: true,
+         },
+         tipo: {
+           type: String,
+           enum: ['GENERAL', 'ESPECIFICO'],
+           required: true,
+         },
+       },
+     ],
   },
   {
     toJSON: { virtuals: true }, 

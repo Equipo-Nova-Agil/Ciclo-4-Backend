@@ -9,6 +9,11 @@ const avanceSchema = new Schema({
     type: Date,
     required: true,
   },
+  proyecto: {
+    type: Schema.Types.ObjectId,
+    ref: ModeloProyectos,
+    required: true,
+  },
   descripcion: {
     type: String,
     required: true,
@@ -18,11 +23,6 @@ const avanceSchema = new Schema({
       type: String,
     },
   ],
-  proyecto: {
-    type: Schema.Types.ObjectId,
-    ref: ModeloProyectos,
-    required: true,
-  },
   creadoPor: {
     type: Schema.Types.ObjectId,
     ref: ModeloUsuarios,

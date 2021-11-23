@@ -1,6 +1,17 @@
 import { gql } from 'apollo-server-express';
 
 const tiposProyecto = gql`
+
+  type Objetivo {
+    _id: ID!
+    descripcion: String!
+    tipo: Enum_TipoObjetivo!
+  }
+
+  input crearObjetivo {
+    descripcion: String!
+    tipo: Enum_TipoObjetivo!
+  }
   
   type Proyecto {
     _id: ID!
@@ -11,8 +22,7 @@ const tiposProyecto = gql`
     estado: Enum_EstadoProyecto!
     fase: Enum_FaseProyecto!
     lider: Usuario!
-    objetivosGenerales: String!
-    objetivosEspecificos: String!
+    objetivos: [Objetivo]
     avances: [Avance]
     inscripciones: [Inscripcion]
   }
@@ -24,14 +34,13 @@ const tiposProyecto = gql`
   type Mutation {
     crearProyecto(
       nombre: String!
-      presupuesto: Float!
       fechaInicio: Date!
       fechaFin: Date!
-      estado: Enum_EstadoProyecto!
-      fase: Enum_FaseProyecto!
+      objetivos: [crearObjetivo]
       lider: String!
-      objetivosGenerales: String!
-      objetivosEspecificos: String!
+      presupuesto: Float!
+      fase: Enum_FaseProyecto!
+      estado: Enum_EstadoProyecto! 
     ): Proyecto
   }
 `;
