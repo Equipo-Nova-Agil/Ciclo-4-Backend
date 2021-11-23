@@ -42,17 +42,7 @@ const proyectoSchema = new Schema(
       ref: ModeloUsuarios,
     },
 
-    // objetivosGenerales: {
-    //   type: String,
-    //   required: true,
-    // },
-
-    // objetivosEspecificos: {
-    //   type: String,
-    //   required: true,
-    // },
-
-     objetivos: [
+    objetivos: [
        {
          descripcion: {
            type: String,

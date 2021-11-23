@@ -3,7 +3,7 @@ import { ModeloInscripciones } from './Inscripciones.js';
 const resolverInscripciones = {
   Query: {
     Inscripciones: async (parent, args) => {
-      const inscripciones = await ModeloInscripciones.find();
+      const inscripciones = await ModeloInscripciones.find().populate('proyecto').populate('estudiante');
       return inscripciones;
     },
   },
@@ -12,6 +12,8 @@ const resolverInscripciones = {
       const inscripcionCreada = await ModeloInscripciones.create({
         proyecto: args.proyecto,
         estudiante: args.estudiante,
+        fechaIngreso: args.fechaIngreso,
+        fechaEgreso: args.fechaEgreso,
         estado: args.estado,
       });
       return inscripcionCreada;

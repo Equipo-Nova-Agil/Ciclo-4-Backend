@@ -19,7 +19,7 @@ const resolversAvance = {
         fecha: args.fecha,
         proyecto: args.proyecto,
         descripcion: args.descripcion,
-        observaciones: args.observaciones,
+        // observaciones: args.observaciones,
         creadoPor: args.creadoPor,
       });
       return avanceCreado;
