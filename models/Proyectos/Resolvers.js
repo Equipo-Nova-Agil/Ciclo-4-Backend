@@ -17,7 +17,8 @@ const resolversProyecto = {
         fechaFin: args.fechaFin,
         presupuesto: args.presupuesto,
         lider: args.lider,
-        objetivos: args.objetivos,
+        objetivosGenerales: args.objetivosGenerales,
+        objetivosEspecificos: args.objetivosEspecificos,
       });
       return proyectoCreado;
     },

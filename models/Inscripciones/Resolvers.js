@@ -10,9 +10,9 @@ const resolverInscripciones = {
   Mutation: {
     crearInscripcion: async (parent, args) => {
       const inscripcionCreada = await ModeloInscripciones.create({
-        estado: args.estado,
         proyecto: args.proyecto,
         estudiante: args.estudiante,
+        estado: args.estado,
       });
       return inscripcionCreada;
     },
@@ -20,8 +20,8 @@ const resolverInscripciones = {
       const inscripcionAprobada = await ModeloInscripciones.findByIdAndUpdate(
         args.id,
         {
-          estado: 'ACEPTADO',
           fechaIngreso: Date.now(),
+          estado: 'ACEPTADO',
         },
         { new: true }
       );
