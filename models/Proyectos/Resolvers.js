@@ -3,7 +3,7 @@ import { ModeloProyectos } from './Proyectos.js';
 const resolversProyecto = {
   Query: {
     Proyectos: async (parent, args) => {
-      const proyectos = await ModeloProyectos.find().populate('avances').populate('inscripciones').populate('lider');
+      const proyectos = await ModeloProyectos.find().populate('avances').populate('inscripciones').populate('lider').populate('estudiante');
       return proyectos;
     },
   },

@@ -37,11 +37,33 @@ const usuarioSchema = new Schema({
     required: true,
     enum: ['ESTUDIANTE', 'LIDER', 'ADMINISTRADOR'],
   },
+
+  password: {
+    type: String,
+    required: true,
+  },
+
   estado: {
     type: String,
     enum: ['PENDIENTE', 'AUTORIZADO', 'NO_AUTORIZADO'],
     default: 'PENDIENTE',
   },
+},
+  {
+    toJSON: { virtuals: true }, 
+    toObject: { virtuals: true }, 
+  }
+);
+usuarioSchema.virtual('proyectos', {
+  ref: 'Proyectos',
+  localField: '_id',
+  foreignField: 'usuario',
+});
+
+usuarioSchema.virtual('inscripciones', {
+  ref: 'Inscripciones',
+  localField: '_id',
+  foreignField: 'usuario',
 });
 
 const ModeloUsuarios = model('Usuarios', usuarioSchema);

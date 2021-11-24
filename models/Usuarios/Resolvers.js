@@ -4,7 +4,7 @@ const resolversUsuario = {
   Query: {
     Usuarios: async (parent, args) => {
       console.log('parent usuario', parent);
-      const usuarios = await ModeloUsuarios.find();
+      const usuarios = await ModeloUsuarios.find().populate('inscripciones').populate('proyectos');
       return usuarios;
     },
     Usuario: async (parent, args) => {

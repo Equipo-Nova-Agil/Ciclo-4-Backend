@@ -34,7 +34,24 @@ const inscripcionSchema = new Schema({
     default: 'PENDIENTE',
     required: true,
   },
+},
+{
+    toJSON: { virtuals: true }, 
+    toObject: { virtuals: true }, 
+  }
+);
+inscripcionSchema.virtual('proyectos', {
+  ref: 'Proyectos',
+  localField: '_id',
+  foreignField: 'inscripcion',
 });
+
+inscripcionSchema.virtual('usuarios', {
+  ref: 'Usuarios',
+  localField: '_id',
+  foreignField: 'inscripcion',
+});
+
 
 const ModeloInscripciones = model('Inscripciones', inscripcionSchema);
 
