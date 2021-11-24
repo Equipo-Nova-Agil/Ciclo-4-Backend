@@ -11,6 +11,7 @@ const tiposUsuario = gql`
     password: String!
     estado: Enum_EstadoUsuario
     
+    
   }
 
   type Query {

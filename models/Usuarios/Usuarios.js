@@ -66,6 +66,11 @@ usuarioSchema.virtual('inscripciones', {
   foreignField: 'usuario',
 });
 
+usuarioSchema.virtual('proyectosLiderados', {
+  ref: 'Proyectos',
+  localField: '_id',
+  foreignField: 'lider',
+});
 const ModeloUsuarios = model('Usuarios', usuarioSchema);
 
 export { ModeloUsuarios };
