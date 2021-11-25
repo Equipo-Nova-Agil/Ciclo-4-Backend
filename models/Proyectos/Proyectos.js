@@ -42,8 +42,6 @@ const proyectoSchema = new Schema(
       ref: ModeloUsuarios,
     },
 
-    
-
     objetivos: [
        {
          descripcion: {
@@ -76,11 +74,7 @@ proyectoSchema.virtual('inscripciones', {
   foreignField: 'proyecto',
 });
 
-proyectoSchema.virtual('estudiante', {
-  ref: 'Usuarios',
-  localField: '_id',
-  foreignField: 'proyecto',
-});
+
 
 const ModeloProyectos = model('Proyectos', proyectoSchema);
 

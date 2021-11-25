@@ -54,16 +54,15 @@ const usuarioSchema = new Schema({
     toObject: { virtuals: true }, 
   }
 );
-usuarioSchema.virtual('proyectos', {
-  ref: 'Proyectos',
+usuarioSchema.virtual('avancesCreados',{
+  ref:'Avances', 
   localField: '_id',
-  foreignField: 'usuario',
+  foreignField: 'creadoPor'
 });
-
 usuarioSchema.virtual('inscripciones', {
   ref: 'Inscripciones',
   localField: '_id',
-  foreignField: 'usuario',
+  foreignField: 'estudiante',
 });
 
 usuarioSchema.virtual('proyectosLiderados', {
