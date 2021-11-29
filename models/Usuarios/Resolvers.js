@@ -19,8 +19,19 @@ const resolversUsuario = {
       return usuarios;
     },
     Usuario: async (parent, args) => {
-      const usuario = await ModeloUsuarios.findOne({ _id: args._id });
-      return usuario;
+      const usuario = await ModeloUsuarios.findOne({ _id: args._id }).populate([
+      {
+        path: 'inscripciones',
+        populate: {
+          path: 'proyecto',
+          populate: [{ path: 'lider' }, { path: 'avances' }],
+        },
+      },
+      {
+        path: 'proyectosLiderados',
+      },
+    ]).exec();
+    return usuario;
     },
   },
   Mutation: {

@@ -34,15 +34,7 @@ const inscripcionSchema = new Schema({
     default: 'PENDIENTE',
     required: true,
   },
-},
-{
-    toJSON: { virtuals: true }, 
-    toObject: { virtuals: true }, 
-  }
-);
-
-
-
+});
 
 
 const ModeloInscripciones = model('Inscripciones', inscripcionSchema);

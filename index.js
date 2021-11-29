@@ -21,16 +21,16 @@ const getUserData = (token) => {
 const server = new ApolloServer({
   typeDefs: tipos,
   resolvers: resolvers,
-  context: ({ req }) => {
-    const token = req.headers?.authorization ?? null;
-    if (token) {
-      const userData = getUserData(token);
-      if (userData) {
-        return { userData };
-      }
-    }
-    return null;
-  },
+  // context: ({ req }) => {
+  //   const token = req.headers?.authorization ?? null;
+  //   if (token) {
+  //     const userData = getUserData(token);
+  //     if (userData) {
+  //       return { userData };
+  //     }
+  //   }
+  //   return null;
+  // },
 });
 
 const app = express();
