@@ -9,14 +9,14 @@ import { validarToken } from './utils/tokenUtils.js';
 
 dotenv.config();
 
-const getUserData = (token) => {
-  const verificacion = validarToken(token.split(' ')[1]);
-  if (verificacion.data) {
-    return verificacion.data;
-  } else {
-    return null;
-  }
-};
+// const getUserData = (token) => {
+//   const verificacion = validarToken(token.split(' ')[1]);
+//   if (verificacion.data) {
+//     return verificacion.data;
+//   } else {
+//     return null;
+//   }
+// };
 
 const server = new ApolloServer({
   typeDefs: tipos,
