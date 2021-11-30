@@ -17,8 +17,17 @@ const resolversAutenticacion = {
       });
       console.log('Usuario Creado', usuarioCreado);
 
-      return 'Usuario Creado'
-    },
+      return {
+        token: generarToken({
+           _id: usuarioCreado._id,
+           nombre: usuarioCreado.nombre,
+           apellido: usuarioCreado.apellido,
+           identificacion: usuarioCreado.identificacion,
+           correo: usuarioCreado.correo,
+           rol: usuarioCreado.rol,
+          }),
+        };
+      },
   },
 };
 
