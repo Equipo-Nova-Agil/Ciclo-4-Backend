@@ -24,6 +24,28 @@ const resolversAvance = {
       });
       return avanceCreado;
     },
+    editarAvance: async (parents, args) => {
+      const avanceEditado = await ModeloAvances.findByIdAndUpdate(
+        args._id,
+        {
+          fecha: args.fecha,
+          proyecto: args.proyecto,
+          descripcion: args.descripcion,
+          creadoPor: args.creadoPor,
+        },
+        { new: true}
+      );
+      return avanceEditado;
+    },
+    eliminarAvance: async (parents, args) => {
+      if(Object.keys(args).includes('_id')){
+        const avanceEliminado = await ModeloAvances.findOneAndDelete({ _id: args._id});
+        return avanceEliminado;
+      }else if(Object.keys(args).includes('descripcion')){
+        const usuarioEliminado = await ModeloUsuarios.findOneAndDelete({descripcion: args.descripcion});
+        return usuarioEliminado;
+      }
+    },
   },
 };
 
