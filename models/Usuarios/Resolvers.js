@@ -33,6 +33,14 @@ const resolversUsuario = {
     ]).exec();
     return usuario;
     },
+    UsuariosPorRol: async (parent, args) => {
+      const usuariosPorRol = await ModeloUsuarios.find({ rol: args.rol });
+      return usuariosPorRol;
+    },
+    UsuariosPorEstado: async (parent, args) => {
+      const usuariosPorEstado = await ModeloUsuarios.find({ estado: args.estado });
+      return usuariosPorEstado;
+    },
   },
   Mutation: {
     crearUsuario: async (parent, args) => {

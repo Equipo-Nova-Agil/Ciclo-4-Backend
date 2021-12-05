@@ -30,6 +30,7 @@ const tiposProyecto = gql`
 
   type Query {
     Proyectos: [Proyecto]
+    Proyecto(_id: String!): Proyecto
   }
 
   type Mutation {
@@ -55,6 +56,9 @@ const tiposProyecto = gql`
       fase: Enum_FaseProyecto!
       estado: Enum_EstadoProyecto! 
     ): Proyecto
+
+    eliminarProyecto(_id: String, nombre: String): Proyecto
+
   }
 `;
 
