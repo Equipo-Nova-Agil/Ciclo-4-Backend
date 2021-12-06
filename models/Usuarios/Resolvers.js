@@ -1,45 +1,66 @@
 import { ModeloUsuarios } from './Usuarios.js';
+import {ModeloInscripciones} from '../Inscripciones/Inscripciones.js';
 import bcrypt from 'bcrypt';
 
 const resolversUsuario = {
+  
+  // Query: {
+  //   Usuarios: async (parent, args, context) => {
+  //     const usuarios = await ModeloUsuarios.find().populate([
+  //       {
+  //         path: 'inscripciones',
+  //         populate: {
+  //           path: 'proyecto',
+  //           populate: [{ path: 'lider' }, { path: 'avances' }],
+  //         },
+  //       },
+  //       {
+  //         path: 'proyectosLiderados',
+  //       },
+  //     ]);
+  //     return usuarios;
+  //   },
+
+    
+  //   Usuario: async (parent, args) => {
+  //     const usuario = await ModeloUsuarios.findOne({ _id: args._id }).populate([
+  //     {
+  //       path: 'inscripciones',
+  //       populate: {
+  //         path: 'proyecto',
+  //         populate: [{ path: 'lider' }, { path: 'avances' }],
+  //       },
+  //     },
+  //     {
+  //       path: 'proyectosLiderados',
+  //     },
+  //   ]).exec();
+  //   return usuario;
+  //   },
+  //   UsuariosPorRol: async (parent, args) => {
+  //     const usuariosPorRol = await ModeloUsuarios.find({ rol: args.rol });
+  //     return usuariosPorRol;
+  //   },
+  //   UsuariosPorEstado: async (parent, args) => {
+  //     const usuariosPorEstado = await ModeloUsuarios.find({ estado: args.estado });
+  //     return usuariosPorEstado;
+  //   },
+  // },
+  
   Query: {
     Usuarios: async (parent, args, context) => {
-      const usuarios = await ModeloUsuarios.find().populate([
-        {
-          path: 'inscripciones',
-          populate: {
-            path: 'proyecto',
-            populate: [{ path: 'lider' }, { path: 'avances' }],
-          },
-        },
-        {
-          path: 'proyectosLiderados',
-        },
-      ]);
+      console.log(args);
+      const usuarios = await ModeloUsuarios.find({ ...args.filtro });
       return usuarios;
     },
     Usuario: async (parent, args) => {
-      const usuario = await ModeloUsuarios.findOne({ _id: args._id }).populate([
-      {
-        path: 'inscripciones',
-        populate: {
-          path: 'proyecto',
-          populate: [{ path: 'lider' }, { path: 'avances' }],
-        },
-      },
-      {
-        path: 'proyectosLiderados',
-      },
-    ]).exec();
-    return usuario;
+      const usuario = await ModeloUsuarios.findOne({ _id: args._id });
+      return usuario;
     },
-    UsuariosPorRol: async (parent, args) => {
-      const usuariosPorRol = await ModeloUsuarios.find({ rol: args.rol });
-      return usuariosPorRol;
-    },
-    UsuariosPorEstado: async (parent, args) => {
-      const usuariosPorEstado = await ModeloUsuarios.find({ estado: args.estado });
-      return usuariosPorEstado;
+  },
+  Usuario: {
+    inscripciones: async (parent, args, context) => {
+      return ModeloInscripciones.find({ estudiante: parent._id });
     },
   },
   Mutation: {
