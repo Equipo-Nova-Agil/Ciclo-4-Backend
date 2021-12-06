@@ -33,6 +33,19 @@ const resolverInscripciones = {
       );
       return inscripcionAprobada;
     },
+    // MUTACIÓN HECHA POR ESTIWAR ------------------------
+    rechazarInscripcion: async (parent, args) => {
+      const inscripcionRechazada = await ModeloInscripciones.findByIdAndUpdate(
+        args.id,
+        {
+          fechaIngreso: Date.now(),
+          estado: 'RECHAZADO',
+        },
+        { new: true }
+      );
+      return inscripcionRechazada;
+    },
+    // -----------------------------------------------------------
   },
 };
 
