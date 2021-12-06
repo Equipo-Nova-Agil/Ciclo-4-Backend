@@ -47,6 +47,11 @@ const resolversAutenticacion = {
           }), 
         };
       }
+      else{
+        return{
+          error: 'Token Invalido',
+        }
+      }
     },
   
 

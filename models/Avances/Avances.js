@@ -20,9 +20,12 @@ const avanceSchema = new Schema({
   },
   observaciones: [
     {
-      type: String,
+      descripcion: {
+        type: String,
+      },
     },
   ],
+
   creadoPor: {
     type: Schema.Types.ObjectId,
     ref: ModeloUsuarios,
