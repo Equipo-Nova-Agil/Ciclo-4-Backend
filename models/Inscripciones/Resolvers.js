@@ -6,6 +6,10 @@ const resolverInscripciones = {
       const inscripciones = await ModeloInscripciones.find().populate('proyecto').populate('estudiante');
       return inscripciones;
     },
+    InscripcionesPorProyecto: async (parent, args) => {
+      const inscripcionesPorProyecto = await ModeloInscripciones.find({ proyecto: args.proyecto }).populate('proyecto').populate('estudiante');
+      return inscripcionesPorProyecto;
+    },
   },
   Mutation: {
     crearInscripcion: async (parent, args) => {

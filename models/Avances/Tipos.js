@@ -22,7 +22,7 @@ input crearObservacion {
 
   type Query {
     Avances: [Avance]
-    filtrarAvance(proyecto: String!): [Avance]
+    FiltrarAvances(proyecto: String!): [Avance]
   }
   type Mutation {
     crearAvance(
