@@ -4,23 +4,6 @@ import bcrypt from 'bcrypt';
 
 const resolversUsuario = {
   
-  // Query: {
-  //   Usuarios: async (parent, args, context) => {
-  //     const usuarios = await ModeloUsuarios.find().populate([
-  //       {
-  //         path: 'inscripciones',
-  //         populate: {
-  //           path: 'proyecto',
-  //           populate: [{ path: 'lider' }, { path: 'avances' }],
-  //         },
-  //       },
-  //       {
-  //         path: 'proyectosLiderados',
-  //       },
-  //     ]);
-  //     return usuarios;
-  //   },
-
     
   //   Usuario: async (parent, args) => {
   //     const usuario = await ModeloUsuarios.findOne({ _id: args._id }).populate([
@@ -50,11 +33,33 @@ const resolversUsuario = {
   Query: {
     Usuarios: async (parent, args, context) => {
       console.log(args);
-      const usuarios = await ModeloUsuarios.find({ ...args.filtro });
+      const usuarios = await ModeloUsuarios.find({ ...args.filtro }).populate([
+              {
+                path: 'inscripciones',
+                populate: {
+                  path: 'proyecto',
+                  populate: [{ path: 'lider' }, { path: 'avances' }],
+                },
+              },
+              {
+                path: 'proyectosLiderados',
+              },
+            ]);
       return usuarios;
     },
     Usuario: async (parent, args) => {
-      const usuario = await ModeloUsuarios.findOne({ _id: args._id });
+      const usuario = await ModeloUsuarios.findOne({ _id: args._id }).populate([
+            {
+              path: 'inscripciones',
+              populate: {
+                path: 'proyecto',
+                populate: [{ path: 'lider' }, { path: 'avances' }],
+              },
+            },
+            {
+              path: 'proyectosLiderados',
+            },
+          ]).exec();
       return usuario;
     },
   },

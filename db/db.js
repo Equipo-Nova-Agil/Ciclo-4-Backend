@@ -4,10 +4,10 @@ const conectarBD = async () => {
   return await mongoose
     .connect(process.env.DATABASE_URL)
     .then(() => {
-      console.log('Conexion Exitosa');
+      console.log('Conexión Exitosa');
     })
     .catch((e) => {
-      console.error('Error conectando a la bd', e);
+      console.error('Error de Conexión', e);
     });
 };
 

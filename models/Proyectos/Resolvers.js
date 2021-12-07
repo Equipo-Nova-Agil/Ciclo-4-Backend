@@ -1,4 +1,5 @@
 import { ModeloProyectos } from "./Proyectos.js";
+import { ModeloUsuarios} from '../Usuarios/Usuarios.js'
 
 const resolversProyecto = {
 

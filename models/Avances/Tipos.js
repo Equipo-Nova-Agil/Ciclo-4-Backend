@@ -42,7 +42,8 @@ input crearObservacion {
     ):Avance
     
     eliminarAvance(
-      _id: String!, descripcion: String!
+      _id: String!
+      # , descripcion: String!
     ):Avance
 
   }

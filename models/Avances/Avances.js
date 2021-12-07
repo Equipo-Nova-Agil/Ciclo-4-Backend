@@ -20,9 +20,7 @@ const avanceSchema = new Schema({
   },
   observaciones: [
     {
-      descripcion: {
-        type: String,
-      },
+      type: String,
     },
   ],
 
