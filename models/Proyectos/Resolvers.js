@@ -5,12 +5,13 @@ import {ModeloInscripciones} from '../Inscripciones/Inscripciones.js';
 const resolversProyecto = {
 
   Proyecto: {
-    // lider: async (parent, args, context) => {
-    //   const usr = await ModeloUsuarios.findOne({
-    //     _id: parent.lider.toString(),
-    //   });
-    //   return lider;
-    // },
+    lider: async (parent, args, context) => {
+      const usr = await ModeloUsuarios.findOne({
+        _id: parent.lider
+        // .toString(),
+      });
+      return usr;
+    },
     inscripciones: async (parent, args, context) => {
       const inscripciones = await ModeloInscripciones.find({
         proyecto: parent._id,
