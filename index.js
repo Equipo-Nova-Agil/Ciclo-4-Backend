@@ -21,7 +21,7 @@ const getUserData = (token) => {
 const server = new ApolloServer({
   typeDefs: tipos,
   resolvers: resolvers,
-  context: ({ req }) => {
+  context: ({ req, res }) => {
     const token = req.headers?.authorization ?? null;
     if (token) {
       const userData = getUserData(token);
@@ -29,6 +29,9 @@ const server = new ApolloServer({
         return { userData };
       }
     }
+    // else{
+    //   res.send (401);
+    // }
     return null;
   },
 });

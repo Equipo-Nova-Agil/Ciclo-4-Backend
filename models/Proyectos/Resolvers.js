@@ -6,11 +6,11 @@ const resolversProyecto = {
 
   Proyecto: {
     lider: async (parent, args, context) => {
-      const usr = await ModeloUsuarios.findOne({
+      const user = await ModeloUsuarios.findOne({
         _id: parent.lider
         // .toString(),
       });
-      return usr;
+      return user;
     },
     inscripciones: async (parent, args, context) => {
       const inscripciones = await ModeloInscripciones.find({
