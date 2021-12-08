@@ -1,7 +1,23 @@
 import { ModeloProyectos } from "./Proyectos.js";
-import { ModeloUsuarios} from '../Usuarios/Usuarios.js'
+import { ModeloUsuarios} from '../Usuarios/Usuarios.js';
+import {ModeloInscripciones} from '../Inscripciones/Inscripciones.js';
 
 const resolversProyecto = {
+
+  Proyecto: {
+    lider: async (parent, args, context) => {
+      const usr = await ModeloUsuarios.findOne({
+        _id: parent.lider.toString(),
+      });
+      return usr;
+    },
+    inscripciones: async (parent, args, context) => {
+      const inscripciones = await ModeloInscripciones.find({
+        proyecto: parent._id,
+      });
+      return inscripciones;
+    },
+  },
 
   Query: {
     Proyectos: async (parent, args) => {

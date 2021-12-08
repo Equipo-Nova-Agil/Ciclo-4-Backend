@@ -3,32 +3,11 @@ import {ModeloInscripciones} from '../Inscripciones/Inscripciones.js';
 import bcrypt from 'bcrypt';
 
 const resolversUsuario = {
-  
-    
-  //   Usuario: async (parent, args) => {
-  //     const usuario = await ModeloUsuarios.findOne({ _id: args._id }).populate([
-  //     {
-  //       path: 'inscripciones',
-  //       populate: {
-  //         path: 'proyecto',
-  //         populate: [{ path: 'lider' }, { path: 'avances' }],
-  //       },
-  //     },
-  //     {
-  //       path: 'proyectosLiderados',
-  //     },
-  //   ]).exec();
-  //   return usuario;
-  //   },
-  //   UsuariosPorRol: async (parent, args) => {
-  //     const usuariosPorRol = await ModeloUsuarios.find({ rol: args.rol });
-  //     return usuariosPorRol;
-  //   },
-  //   UsuariosPorEstado: async (parent, args) => {
-  //     const usuariosPorEstado = await ModeloUsuarios.find({ estado: args.estado });
-  //     return usuariosPorEstado;
-  //   },
-  // },
+  Usuario: {
+    inscripciones: async (parent, args, context) => {
+      return InscriptionModel.find({ estudiante: parent._id });
+    },
+  },
   
   Query: {
     Usuarios: async (parent, args, context) => {
