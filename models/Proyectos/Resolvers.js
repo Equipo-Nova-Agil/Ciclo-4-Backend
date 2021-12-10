@@ -7,8 +7,7 @@ const resolversProyecto = {
   Proyecto: {
     lider: async (parent, args, context) => {
       const user = await ModeloUsuarios.findOne({
-        _id: parent.lider
-        // .toString(),
+        _id: parent.lider,
       });
       return user;
     },
@@ -21,7 +20,7 @@ const resolversProyecto = {
   },
 
   Query: {
-    Proyectos: async (parent, args) => {
+    Proyectos: async (parent, args, context) => {
       const proyectos = await ModeloProyectos.find()
         .populate("avances")
         .populate("inscripciones")
@@ -38,7 +37,7 @@ const resolversProyecto = {
   },
 
   Mutation: {
-    crearProyecto: async (parent, args) => {
+    crearProyecto: async (parent, args, context) => {
       const proyectoCreado = await ModeloProyectos.create({
         nombre: args.nombre,
         estado: args.estado,
@@ -78,6 +77,47 @@ const resolversProyecto = {
         const proyectoEliminado = await ModeloProyectos.findOneAndDelete({ correo: args.nombre });
         return proyectoEliminado;
       }
+    },
+
+    crearObjetivo: async (parent, args) => {
+      const proyectoConObjetivo = await ModeloProyectos.findByIdAndUpdate(
+        args.idProyecto,
+        {
+          $addToSet: {
+            objetivos: { ...args.campos },
+          },
+        },
+        { new: true }
+      );
+
+      return proyectoConObjetivo;
+    },
+    editarObjetivo: async (parent, args) => {
+      const proyectoEditado = await ModeloProyectos.findByIdAndUpdate(
+        args.idProyecto,
+        {
+          $set: {
+            [`objetivos.${args.indexObjetivo}.descripcion`]: args.campos.descripcion,
+            [`objetivos.${args.indexObjetivo}.tipo`]: args.campos.tipo,
+          },
+        },
+        { new: true }
+      );
+      return proyectoEditado;
+    },
+    eliminarObjetivo: async (parent, args) => {
+      const proyectoObjetivo = await ModeloProyectos.findByIdAndUpdate(
+        { _id: args.idProyecto },
+        {
+          $pull: {
+            objetivos: {
+              _id: args.idObjetivo,
+            },
+          },
+        },
+        { new: true }
+      );
+      return proyectoObjetivo;
     },
 
   },

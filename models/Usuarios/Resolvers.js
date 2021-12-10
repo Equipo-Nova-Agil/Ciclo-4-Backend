@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 const resolversUsuario = {
   Usuario: {
     inscripciones: async (parent, args, context) => {
-      return InscriptionModel.find({ estudiante: parent._id });
+      return ModeloInscripciones.find({ estudiante: parent._id });
     },
   },
   
