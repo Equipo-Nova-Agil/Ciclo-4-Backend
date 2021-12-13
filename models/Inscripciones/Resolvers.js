@@ -14,6 +14,12 @@ const resolverInscripciones = {
   },
   Query: {
     Inscripciones: async (parent, args) => {
+      if (context.userData){
+        if (context.userData.rol === 'ESTUDIANTE'){
+          const inscripciones = await ModeloInscripciones.find({ estudiante: context.userData._id });
+          return inscripciones;
+        }
+      }
       const inscripciones = await ModeloInscripciones.find().populate('proyecto').populate('estudiante');
       return inscripciones;
     },
