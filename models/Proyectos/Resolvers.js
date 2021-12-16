@@ -21,17 +21,24 @@ const resolversProyecto = {
 
   Query: {
     Proyectos: async (parent, args, context) => {
-      if (context.userData){
-        if (context.userData.rol === 'LIDER'){
-          const proyectos = await ModeloProyectos.find({ lider: context.userData._id });
-          return proyectos;
-        }
-      }
+      // if (context.userData){
+      //   if (context.userData.rol === 'LIDER'){
+      //     const proyectos = await ModeloProyectos.find({ lider: context.userData._id });
+      //     return proyectos;
+      //   }
+      //   else{
+      //     const proyectos = await ModeloProyectos.find()
+      //     .populate("avances")
+      //     .populate("inscripciones")
+      //     .populate("lider");
+      //   return proyectos;
+      //   }
+      // }
       const proyectos = await ModeloProyectos.find()
-        .populate("avances")
-        .populate("inscripciones")
-        .populate("lider");
-      return proyectos;
+      .populate("avances")
+      .populate("inscripciones")
+      .populate("lider");
+    return proyectos; 
     },
     Proyecto: async (parent, args) => {
       const proyecto = await ModeloProyectos.findOne({ _id: args._id })

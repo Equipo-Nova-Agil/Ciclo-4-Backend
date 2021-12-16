@@ -11,7 +11,7 @@ input crearObservacion {
   tipo: Enum_TipoObjetivo!
 }
 
-  type Avance {
+type Avance {
     _id: ID!
     fecha: Date!
     proyecto: Proyecto!
@@ -20,10 +20,26 @@ input crearObservacion {
     creadoPor: Usuario!
   }
 
-  type Query {
-    Avances: [Avance]
-    filtrarAvance(proyecto: String!): [Avance]
+  input FiltroAvances {
+    _id: ID
+    fecha: Date
+    proyecto: String
+    creadoPor: String
+    
   }
+
+  type Query {
+    Avances(filtro: FiltroAvances): [Avance]
+    filtrarAvance(_id: String!): Avance
+  }
+
+  # type Query {
+  #   Avances: [Avance]
+  #   # filtrarAvance(proyecto: String!): [Avance]
+  #   filtrarAvance(_id: String!): Avance
+  # }
+
+  
   type Mutation {
     crearAvance(
       fecha: Date!,

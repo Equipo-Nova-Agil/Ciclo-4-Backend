@@ -1,18 +1,38 @@
 import { ModeloAvances } from './Avances.js';
+import {ModeloProyectos} from '../Proyectos/Proyectos.js';
 
 const resolversAvance = {
   Query: {
-    Avances: async (parent, args) => {
-      const avances = await ModeloAvances.find().populate('proyecto').populate('creadoPor');
-      return avances;
+    Avances: async (parent, args, context) => {
+      // if (context.userData){
+      //   if (context.userData.rol === 'ESTUDIANTE'){
+      //     const avances = await ModeloAvances.find({ estudiante: context.userData._id }).populate('proyecto').populate('creadoPor');
+      //     return avances;
+      //   }
+      //   else{
+      //     if (context.userData.rol === 'LIDER'){
+      //       const avances = await ModeloAvances.find({ lider: context.userData._id }).populate('proyecto').populate('creadoPor');
+      //       return avances;
+      //     }
+      //     else{
+      //       const avances = await ModeloAvances.find().populate('proyecto').populate('creadoPor');
+      //       return avances;
+      //     }
+      //   }
+      // }
+      const avances = await ModeloAvances.find({...args.filtro}).populate('proyecto').populate('creadoPor');
+            return avances;  
     },
-    filtrarAvance: async (parents, args) => {
-      const avanceFiltrado = await ModeloAvances.find({ proyecto: args._id })
+
+    filtrarAvance: async (parents, args, context) => {
+      const avanceFiltrado = await ModeloAvances.findOne({ _id: args._id })
+      // ({ proyecto: args._id })
         .populate('proyecto')
         .populate('creadoPor');
       return avanceFiltrado;
     },
   },
+
   Mutation: {
     crearAvance: async (parents, args) => {
       const avanceCreado = ModeloAvances.create({
