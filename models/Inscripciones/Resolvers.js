@@ -20,7 +20,7 @@ const resolverInscripciones = {
           return inscripciones;
         }
       }
-      const inscripciones = await ModeloInscripciones.find().populate('proyecto').populate('estudiante');
+      const inscripciones = await ModeloInscripciones.find({...args.filtro}).populate('proyecto').populate('estudiante');
       return inscripciones;
     },
     InscripcionesPorProyecto: async (parent, args) => {

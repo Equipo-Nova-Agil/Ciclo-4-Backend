@@ -34,7 +34,7 @@ const resolversProyecto = {
       //   return proyectos;
       //   }
       // }
-      const proyectos = await ModeloProyectos.find()
+      const proyectos = await ModeloProyectos.find({...args.filtro})
       .populate("avances")
       .populate("inscripciones")
       .populate("lider");

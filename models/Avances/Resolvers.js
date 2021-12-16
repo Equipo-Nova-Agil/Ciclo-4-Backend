@@ -1,32 +1,13 @@
 import { ModeloAvances } from './Avances.js';
-import {ModeloProyectos} from '../Proyectos/Proyectos.js';
 
 const resolversAvance = {
   Query: {
-    Avances: async (parent, args, context) => {
-      // if (context.userData){
-      //   if (context.userData.rol === 'ESTUDIANTE'){
-      //     const avances = await ModeloAvances.find({ estudiante: context.userData._id }).populate('proyecto').populate('creadoPor');
-      //     return avances;
-      //   }
-      //   else{
-      //     if (context.userData.rol === 'LIDER'){
-      //       const avances = await ModeloAvances.find({ lider: context.userData._id }).populate('proyecto').populate('creadoPor');
-      //       return avances;
-      //     }
-      //     else{
-      //       const avances = await ModeloAvances.find().populate('proyecto').populate('creadoPor');
-      //       return avances;
-      //     }
-      //   }
-      // }
+    Avances: async (parent, args) => {
       const avances = await ModeloAvances.find({...args.filtro}).populate('proyecto').populate('creadoPor');
-            return avances;  
+      return avances;
     },
-
-    filtrarAvance: async (parents, args, context) => {
-      const avanceFiltrado = await ModeloAvances.findOne({ _id: args._id })
-      // ({ proyecto: args._id })
+    filtrarAvance: async (parents, args) => {
+      const avanceFiltrado = await ModeloAvances.find({ proyecto: args._id })
         .populate('proyecto')
         .populate('creadoPor');
       return avanceFiltrado;
@@ -66,7 +47,50 @@ const resolversAvance = {
         return usuarioEliminado;
       }
     },
+    
+    crearObservacion: async (parent, args) => {
+      const avanceConObservacion = await ModeloAvances.findByIdAndUpdate(
+        args.idProyecto,
+        {
+          $addToSet: {
+            observaciones: { ...args.campos },
+          },
+        },
+        { new: true }
+      );
+
+      return avanceConObservacion;
+    },
+    editarObservacion: async (parent, args) => {
+      const avanceEditado = await ModeloAvances.findByIdAndUpdate(
+        args.idProyecto,
+        {
+          $set: {
+            [`observaciones.${args.indexObservacion}.descripcion`]: args.campos.descripcion,
+            [`observaciones.${args.indexObservacion}.tipo`]: args.campos.tipo,
+          },
+        },
+        { new: true }
+      );
+      return avanceEditado;
+    },
+    eliminarObservacion: async (parent, args) => {
+      const avanceObservacion = await ModeloAvances.findByIdAndUpdate(
+        { _id: args.idProyecto },
+        {
+          $pull: {
+            observaciones: {
+              _id: args.idObjetivo,
+            },
+          },
+        },
+        { new: true }
+      );
+      return avanceObservacion;
+    },
+
   },
+
 };
 
 export { resolversAvance };
