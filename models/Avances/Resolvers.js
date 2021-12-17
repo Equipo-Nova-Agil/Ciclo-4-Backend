@@ -1,5 +1,5 @@
 import { ModeloAvances } from './Avances.js';
-
+import { ModeloProyectos } from '../Proyectos/Proyectos.js';
 
 const resolversAvance = {
 
@@ -25,6 +25,19 @@ const resolversAvance = {
         observaciones: args.observaciones,
         creadoPor: args.creadoPor,
       });
+
+      //cambiar estado del proyecto a DESARROLLO
+      // const CountAvancesInProyecto = await ModeloAvances.find({ proyecto: avanceCreado.proyecto });
+      // if (CountAvancesInProyecto.length === 0) {
+      //   const elProyectoModificado = await ModeloProyectos.findByIdAndUpdate(
+      //     { _id: avanceCreado.proyecto },
+      //     {
+      //       fase: 'DESARROLLO',
+      //     }
+      //   );
+      //   console.log('Proyecto modificado', elProyectoModificado);
+      // }
+
       return avanceCreado;
     },
     editarAvance: async (parents, args) => {
