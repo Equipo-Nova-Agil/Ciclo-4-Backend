@@ -11,7 +11,19 @@ input crearObservacion {
   tipo: Enum_TipoObjetivo!
 }
 
-  type Avance {
+input camposObservacion {
+    tipo: Enum_TipoObjetivo!
+    descripcion: String!
+  }
+
+  input camposAvance {
+    fecha: Date
+    preyecto: String
+    descripcion: String
+    creadoPor: String
+  }
+
+type Avance {
     _id: ID!
     fecha: Date!
     proyecto: Proyecto!
@@ -20,31 +32,56 @@ input crearObservacion {
     creadoPor: Usuario!
   }
 
+  input FiltroAvances {
+    _id: ID
+    fecha: Date
+    proyecto: String
+    creadoPor: String
+    
+  }
+
   type Query {
-    Avances: [Avance]
+    Avances(filtro: FiltroAvances): [Avance]
     filtrarAvance(proyecto: String!): [Avance]
   }
+
   type Mutation {
     crearAvance(
       fecha: Date!,
       proyecto: String!,
       descripcion: String!,
-      observacion:[crearObservacion],
       creadoPor: String!
+      observacion:[crearObservacion],
     ): Avance
 
     editarAvance(
       _id: String!
-      fecha: Date!
-      proyecto: String!
-      descripcion: String!
-      creadoPor: String!
+      campos: camposAvance!
+      # fecha: Date!
+      # proyecto: String!
+      # descripcion: String!
+      # creadoPor: String!
     ):Avance
     
     eliminarAvance(
       _id: String!
       # , descripcion: String!
     ):Avance
+
+    crearObservacion(
+      idProyecto: String!, 
+      campos: camposObservacion!
+      ): Avance
+    
+    editarObservacion(
+      idProyecto: String!, 
+      indexObservacion: Int!, 
+      campos: camposObservacion!): Avance
+    
+    eliminarObservacion(
+      idProyecto: String!, 
+      idObservacion: String!
+      ): Avance
 
   }
 `;

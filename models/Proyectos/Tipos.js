@@ -13,20 +13,20 @@ const tiposProyecto = gql`
     descripcion: String!
   }
 
-  # input camposObjetivo {
-  #   tipo: Enum_TipoObjetivo!
-  #   descripcion: String!
-  # }
+  input camposObjetivo {
+    tipo: Enum_TipoObjetivo!
+    descripcion: String!
+  }
 
-  # input camposProyecto {
-  #   nombre: String
-  #   presupuesto: Float
-  #   fechaInicio: Date
-  #   fechaFin: Date
-  #   lider: String
-  #   fase: Enum_FaseProyecto
-  #   estado: Enum_EstadoProyecto
-  # }
+  input camposProyecto {
+    nombre: String
+    presupuesto: Float
+    fechaInicio: Date
+    fechaFin: Date
+    lider: String
+    fase: Enum_FaseProyecto
+    estado: Enum_EstadoProyecto
+  }
   
   type Proyecto {
     _id: ID!
@@ -43,36 +43,62 @@ const tiposProyecto = gql`
     
   }
 
+  input FiltroProyectos {
+    _id: ID
+    nombre: String
+    lider: String
+    fase: String
+    estado: String
+    
+  }
+
   type Query {
-    Proyectos: [Proyecto]
+    Proyectos (filtro: FiltroProyectos): [Proyecto]
     Proyecto(_id: String!): Proyecto
   }
 
   type Mutation {
     crearProyecto(
       nombre: String!
+      presupuesto: Float!
       fechaInicio: Date!
       fechaFin: Date!
-      objetivos: [crearObjetivo]
       lider: String!
-      presupuesto: Float!
-      fase: Enum_FaseProyecto!
-      estado: Enum_EstadoProyecto! 
+      objetivos: [crearObjetivo]
     ): Proyecto
 
     editarProyecto(
-      _id: String!
-      nombre: String!
-      fechaInicio: Date!
-      fechaFin: Date!
-      objetivos: [crearObjetivo]
-      lider: String!
-      presupuesto: Float!
-      fase: Enum_FaseProyecto!
-      estado: Enum_EstadoProyecto! 
-    ): Proyecto
+      _id: String!, 
+      campos: camposProyecto!
+      ): Proyecto
+    # editarProyecto(
+    #   _id: String!
+    #   nombre: String!
+    #   fechaInicio: Date!
+    #   fechaFin: Date!
+    #   objetivos: [crearObjetivo]
+    #   lider: String!
+    #   presupuesto: Float!
+    #   fase: Enum_FaseProyecto!
+    #   estado: Enum_EstadoProyecto! 
+    # ): Proyecto
 
     eliminarProyecto(_id: String, nombre: String): Proyecto
+
+    crearObjetivo(
+      idProyecto: String!, 
+      campos: camposObjetivo!
+      ): Proyecto
+
+    editarObjetivo(
+      idProyecto: String!, 
+      indexObjetivo: Int!, 
+      campos: camposObjetivo!): Proyecto
+
+    eliminarObjetivo(
+      idProyecto: String!, 
+      idObjetivo: String!
+      ): Proyecto
 
   }
 `;

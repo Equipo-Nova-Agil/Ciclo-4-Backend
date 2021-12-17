@@ -10,8 +10,16 @@ const tiposInscripcion = gql`
     estado: Enum_EstadoInscripcion!
   }
 
+  input FiltroInscripciones {
+    _id: ID
+    proyecto: String
+    estudiante: String
+    estado: String
+    
+  }
+
   type Query {
-    Inscripciones: [Inscripcion]
+    Inscripciones (filtro: FiltroInscripciones): [Inscripcion]
     InscripcionesPorProyecto(proyecto: String!): [Inscripcion]
   }
 
