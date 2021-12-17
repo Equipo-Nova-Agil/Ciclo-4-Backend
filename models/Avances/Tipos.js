@@ -66,8 +66,8 @@ type Avance {
     ):Avance
     
     eliminarAvance(
-      _id: String!
-      # , descripcion: String!
+      _id: String,
+      descripcion: String
     ):Avance
 
     crearObservacion(

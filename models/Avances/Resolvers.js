@@ -45,8 +45,8 @@ const resolversAvance = {
         const avanceEliminado = await ModeloAvances.findOneAndDelete({ _id: args._id});
         return avanceEliminado;
       }else if(Object.keys(args).includes('descripcion')){
-        const usuarioEliminado = await ModeloUsuarios.findOneAndDelete({descripcion: args.descripcion});
-        return usuarioEliminado;
+        const avanceEliminado = await ModeloAvances.findOneAndDelete({descripcion: args.descripcion});
+        return avanceEliminado;
       }
     },
     
