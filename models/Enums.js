@@ -29,6 +29,10 @@ const tiposEnums = gql`
     GENERAL
     ESPECIFICO
   }
+
+  enum Enum_TipoObservacion {
+    OBSERVACION
+  }
   
   enum Enum_EstadoInscripcion {
     ACEPTADO

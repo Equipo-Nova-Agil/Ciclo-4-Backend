@@ -1,6 +1,8 @@
 import { ModeloAvances } from './Avances.js';
 
+
 const resolversAvance = {
+
   Query: {
     Avances: async (parent, args) => {
       const avances = await ModeloAvances.find({...args.filtro}).populate('proyecto').populate('creadoPor');
@@ -20,7 +22,7 @@ const resolversAvance = {
         fecha: args.fecha,
         proyecto: args.proyecto,
         descripcion: args.descripcion,
-        // observaciones: args.observaciones,
+        observaciones: args.observaciones,
         creadoPor: args.creadoPor,
       });
       return avanceCreado;
@@ -50,7 +52,7 @@ const resolversAvance = {
     
     crearObservacion: async (parent, args) => {
       const avanceConObservacion = await ModeloAvances.findByIdAndUpdate(
-        args.idProyecto,
+        args.idAvance,
         {
           $addToSet: {
             observaciones: { ...args.campos },
@@ -63,7 +65,7 @@ const resolversAvance = {
     },
     editarObservacion: async (parent, args) => {
       const avanceEditado = await ModeloAvances.findByIdAndUpdate(
-        args.idProyecto,
+        args.idAvance,
         {
           $set: {
             [`observaciones.${args.indexObservacion}.descripcion`]: args.campos.descripcion,
@@ -76,11 +78,11 @@ const resolversAvance = {
     },
     eliminarObservacion: async (parent, args) => {
       const avanceObservacion = await ModeloAvances.findByIdAndUpdate(
-        { _id: args.idProyecto },
+        { _id: args.idAvance },
         {
           $pull: {
             observaciones: {
-              _id: args.idObjetivo,
+              _id: args.idObservacion,
             },
           },
         },

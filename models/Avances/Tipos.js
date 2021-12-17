@@ -3,16 +3,18 @@ import { gql } from 'apollo-server-express';
 const tiposAvance = gql`
 
 type Observacion {
+  _id: ID!
   descripcion: String!
+  tipo: String!
 }
 
 input crearObservacion {
+  tipo: Enum_TipoObservacion!
   descripcion: String!
-  tipo: Enum_TipoObjetivo!
 }
 
 input camposObservacion {
-    tipo: Enum_TipoObjetivo!
+    tipo: Enum_TipoObservacion!
     descripcion: String!
   }
 
