@@ -97,7 +97,7 @@ const resolversProyecto = {
         const proyectoEliminado = await ModeloProyectos.findOneAndDelete({ _id: args._id });
         return proyectoEliminado;
       } else if (Object.keys(args).includes('nombre')) {
-        const proyectoEliminado = await ModeloProyectos.findOneAndDelete({ correo: args.nombre });
+        const proyectoEliminado = await ModeloProyectos.findOneAndDelete({ nombre: args.nombre });
         return proyectoEliminado;
       }
     },
