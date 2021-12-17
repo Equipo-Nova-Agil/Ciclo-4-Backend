@@ -13,10 +13,10 @@ const tiposProyecto = gql`
     descripcion: String!
   }
 
-  input camposObjetivo {
-    tipo: Enum_TipoObjetivo!
-    descripcion: String!
-  }
+  # input camposObjetivo {
+  #   tipo: Enum_TipoObjetivo!
+  #   descripcion: String!
+  # }
 
   input camposProyecto {
     nombre: String
@@ -26,6 +26,7 @@ const tiposProyecto = gql`
     lider: String
     fase: Enum_FaseProyecto
     estado: Enum_EstadoProyecto
+    objetivos: [crearObjetivo]
   }
   
   type Proyecto {
@@ -85,20 +86,20 @@ const tiposProyecto = gql`
 
     eliminarProyecto(_id: String, nombre: String): Proyecto
 
-    crearObjetivo(
-      idProyecto: String!, 
-      campos: camposObjetivo!
-      ): Proyecto
+    # crearObjetivo(
+    #   idProyecto: String!, 
+    #   campos: camposObjetivo!
+    #   ): Proyecto
 
-    editarObjetivo(
-      idProyecto: String!, 
-      indexObjetivo: Int!, 
-      campos: camposObjetivo!): Proyecto
+    # editarObjetivo(
+    #   idProyecto: String!, 
+    #   indexObjetivo: Int!, 
+    #   campos: camposObjetivo!): Proyecto
 
-    eliminarObjetivo(
-      idProyecto: String!, 
-      idObjetivo: String!
-      ): Proyecto
+    # eliminarObjetivo(
+    #   idProyecto: String!, 
+    #   idObjetivo: String!
+    #   ): Proyecto
 
   }
 `;

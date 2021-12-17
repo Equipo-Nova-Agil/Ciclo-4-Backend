@@ -64,21 +64,31 @@ const resolversProyecto = {
       return proyectoCreado;
     },
 
+    // editarProyecto: async (parent, args) => {
+    //   const proyectoEditado = await ModeloProyectos.findByIdAndUpdate(
+    //     args._id,
+    //     {
+    //       nombre: args.nombre,
+    //       estado: args.estado,
+    //       fase: args.fase,
+    //       fechaInicio: args.fechaInicio,
+    //       fechaFin: args.fechaFin,
+    //       presupuesto: args.presupuesto,
+    //       lider: args.lider,
+    //       objetivos: args.objetivos,
+    //     },
+    //     { new: true }
+    //   );
+    //   return proyectoEditado;
+    // },
+
     editarProyecto: async (parent, args) => {
       const proyectoEditado = await ModeloProyectos.findByIdAndUpdate(
         args._id,
-        {
-          nombre: args.nombre,
-          estado: args.estado,
-          fase: args.fase,
-          fechaInicio: args.fechaInicio,
-          fechaFin: args.fechaFin,
-          presupuesto: args.presupuesto,
-          lider: args.lider,
-          objetivos: args.objetivos,
-        },
+        { ...args.campos },
         { new: true }
       );
+
       return proyectoEditado;
     },
 
@@ -92,46 +102,46 @@ const resolversProyecto = {
       }
     },
 
-    crearObjetivo: async (parent, args) => {
-      const proyectoConObjetivo = await ModeloProyectos.findByIdAndUpdate(
-        args.idProyecto,
-        {
-          $addToSet: {
-            objetivos: { ...args.campos },
-          },
-        },
-        { new: true }
-      );
+    // crearObjetivo: async (parent, args) => {
+    //   const proyectoConObjetivo = await ModeloProyectos.findByIdAndUpdate(
+    //     args.idProyecto,
+    //     {
+    //       $addToSet: {
+    //         objetivos: { ...args.campos },
+    //       },
+    //     },
+    //     { new: true }
+    //   );
 
-      return proyectoConObjetivo;
-    },
-    editarObjetivo: async (parent, args) => {
-      const proyectoEditado = await ModeloProyectos.findByIdAndUpdate(
-        args.idProyecto,
-        {
-          $set: {
-            [`objetivos.${args.indexObjetivo}.descripcion`]: args.campos.descripcion,
-            [`objetivos.${args.indexObjetivo}.tipo`]: args.campos.tipo,
-          },
-        },
-        { new: true }
-      );
-      return proyectoEditado;
-    },
-    eliminarObjetivo: async (parent, args) => {
-      const proyectoObjetivo = await ModeloProyectos.findByIdAndUpdate(
-        { _id: args.idProyecto },
-        {
-          $pull: {
-            objetivos: {
-              _id: args.idObjetivo,
-            },
-          },
-        },
-        { new: true }
-      );
-      return proyectoObjetivo;
-    },
+    //   return proyectoConObjetivo;
+    // },
+    // editarObjetivo: async (parent, args) => {
+    //   const proyectoEditado = await ModeloProyectos.findByIdAndUpdate(
+    //     args.idProyecto,
+    //     {
+    //       $set: {
+    //         [`objetivos.${args.indexObjetivo}.descripcion`]: args.campos.descripcion,
+    //         [`objetivos.${args.indexObjetivo}.tipo`]: args.campos.tipo,
+    //       },
+    //     },
+    //     { new: true }
+    //   );
+    //   return proyectoEditado;
+    // },
+    // eliminarObjetivo: async (parent, args) => {
+    //   const proyectoObjetivo = await ModeloProyectos.findByIdAndUpdate(
+    //     { _id: args.idProyecto },
+    //     {
+    //       $pull: {
+    //         objetivos: {
+    //           _id: args.idObjetivo,
+    //         },
+    //       },
+    //     },
+    //     { new: true }
+    //   );
+    //   return proyectoObjetivo;
+    // },
 
   },
 
