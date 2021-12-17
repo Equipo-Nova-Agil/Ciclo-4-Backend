@@ -13,13 +13,7 @@ const resolverInscripciones = {
     },
   },
   Query: {
-    Inscripciones: async (parent, args, context) => {
-      if (context.userData){
-        if (context.userData.rol === 'ESTUDIANTE'){
-          const inscripciones = await ModeloInscripciones.find({ estudiante: context.userData._id });
-          return inscripciones;
-        }
-      }
+    Inscripciones: async (parent, args) => {
       const inscripciones = await ModeloInscripciones.find({...args.filtro}).populate('proyecto').populate('estudiante');
       return inscripciones;
     },
@@ -33,9 +27,9 @@ const resolverInscripciones = {
       const inscripcionCreada = await ModeloInscripciones.create({
         proyecto: args.proyecto,
         estudiante: args.estudiante,
-        // fechaIngreso: args.fechaIngreso,
-        // fechaEgreso: args.fechaEgreso,
-        // estado: args.estado,
+        fechaIngreso: args.fechaIngreso,
+        fechaEgreso: args.fechaEgreso,
+        estado: args.estado,
       });
       return inscripcionCreada;
     },
@@ -67,3 +61,43 @@ const resolverInscripciones = {
 };
 
 export { resolverInscripciones };
+
+
+
+
+// import { ModeloInscripciones } from './Inscripciones.js';
+
+// const resolverInscripciones = {
+//   Query: {
+//     Inscripciones: async (parent, args) => {
+//       const inscripciones = await ModeloInscripciones.find().populate('proyecto').populate('estudiante');
+//       return inscripciones;
+//     },
+//   },
+//   Mutation: {
+//     crearInscripcion: async (parent, args) => {
+//       const inscripcionCreada = await ModeloInscripciones.create({
+//         proyecto: args.proyecto,
+//         estudiante: args.estudiante,
+//         fechaIngreso: args.fechaIngreso,
+//         fechaEgreso: args.fechaEgreso,
+//         estado: args.estado,
+//       });
+//       return inscripcionCreada;
+//     },
+//     aprobarInscripcion: async (parent, args) => {
+//       const inscripcionAprobada = await ModeloInscripciones.findByIdAndUpdate(
+//         args.id,
+//         {
+//           fechaIngreso: Date.now(),
+//           estado: 'ACEPTADO',
+//         },
+//         { new: true }
+//       );
+//       return inscripcionAprobada;
+//     },
+    
+//   },
+// };
+
+// export { resolverInscripciones };
