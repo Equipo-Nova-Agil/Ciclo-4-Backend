@@ -1,8 +1,8 @@
-import { tipos } from './Usuarios/Tipos.js';
-import { resolvers } from './Usuarios/Resolvers.js';
+import { tiposUsuario } from '../models/Usuarios/Tipos.js';
+import { resolversUsuario } from '../models/Usuarios/Resolvers.js';
 import { gql } from 'apollo-server-express';
 import { ApolloServer } from 'apollo-server-express';
-import conectarBD from './db/db.js';
+import conectarBD from '..db/db.js';
 import dotenv from 'dotenv';
 import assert from 'assert';
 
@@ -10,8 +10,8 @@ dotenv.config();
 await conectarBD();
 
 const server = new ApolloServer({
-  typeDefs: tipos,
-  resolvers: resolvers,
+  typeDefs: tiposUsuario,
+  resolvers: resolversUsuario,
 });
 
 it('creates user', async () => {
