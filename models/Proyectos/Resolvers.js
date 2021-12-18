@@ -88,7 +88,16 @@ const resolversProyecto = {
         { ...args.campos },
         { new: true }
       );
-
+      //REALIZADA POR DUHAN
+      if(args.campos.fase && args.campos.fase==="TERMINADO")
+      {
+        const inscripcionesACerrar = await ModeloInscripciones.updateMany(
+          { fechaEgreso: { $exists: false }, proyecto: args._id },
+          { fechaEgreso: Date.now() }
+        );
+        console.log("Proyecto terminado (" + args._id + ") y se cierra(n) ", inscripcionesACerrar.modifiedCount + " inscripcion(es)");
+      }
+      // -----------------------------------------------------------
       return proyectoEditado;
     },
 
