@@ -70,17 +70,17 @@ type Avance {
     ):Avance
 
     crearObservacion(
-      idProyecto: String!, 
+      idAvance: String!, 
       campos: camposObservacion!
       ): Avance
     
     editarObservacion(
-      idProyecto: String!, 
+      idAvance: String!, 
       indexObservacion: Int!, 
       campos: camposObservacion!): Avance
     
     eliminarObservacion(
-      idProyecto: String!, 
+      idAvance: String!, 
       idObservacion: String!
       ): Avance
 
