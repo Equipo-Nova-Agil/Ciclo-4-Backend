@@ -23,6 +23,7 @@ input camposObservacion {
     preyecto: String
     descripcion: String
     creadoPor: String
+    observaciones: [crearObservacion]
   }
 
 type Avance {
@@ -30,8 +31,10 @@ type Avance {
     fecha: Date!
     proyecto: Proyecto!
     descripcion: String!
-    observaciones: [Observacion]
     creadoPor: Usuario!
+    observaciones: [Observacion]
+    # proyectos: [Proyecto]
+    inscripciones: [Inscripcion]
   }
 
   input FiltroAvances {
@@ -53,16 +56,12 @@ type Avance {
       proyecto: String!,
       descripcion: String!,
       creadoPor: String!
-      observacion:[crearObservacion],
+      observaciones:[crearObservacion],
     ): Avance
 
     editarAvance(
       _id: String!
       campos: camposAvance!
-      # fecha: Date!
-      # proyecto: String!
-      # descripcion: String!
-      # creadoPor: String!
     ):Avance
     
     eliminarAvance(

@@ -26,6 +26,16 @@ const resolversAvance = {
         creadoPor: args.creadoPor,
       });
 
+      const avances = await ModeloAvances.find({ proyecto: avanceCreado.proyecto });
+      if (avances.length === 1) {
+        const proyectoModificado = await ModeloProyectos.findOneAndUpdate(
+          { _id: avanceCreado.proyecto },
+          {
+            fase: 'DESARROLLO',
+          }
+        );
+        console.log('Proyecto Modificado', proyectoModificado);
+      }
       //cambiar estado del proyecto a DESARROLLO
       // const CountAvancesInProyecto = await ModeloAvances.find({ proyecto: avanceCreado.proyecto });
       // if (CountAvancesInProyecto.length === 0) {
@@ -40,6 +50,7 @@ const resolversAvance = {
 
       return avanceCreado;
     },
+
     editarAvance: async (parents, args) => {
       const avanceEditado = await ModeloAvances.findByIdAndUpdate(
         args._id,
@@ -53,6 +64,7 @@ const resolversAvance = {
       );
       return avanceEditado;
     },
+
     eliminarAvance: async (parents, args) => {
       if(Object.keys(args).includes('_id')){
         const avanceEliminado = await ModeloAvances.findOneAndDelete({ _id: args._id});
@@ -73,9 +85,10 @@ const resolversAvance = {
         },
         { new: true }
       );
-
       return avanceConObservacion;
+
     },
+
     editarObservacion: async (parent, args) => {
       const avanceEditado = await ModeloAvances.findByIdAndUpdate(
         args.idAvance,
@@ -89,6 +102,7 @@ const resolversAvance = {
       );
       return avanceEditado;
     },
+
     eliminarObservacion: async (parent, args) => {
       const avanceObservacion = await ModeloAvances.findByIdAndUpdate(
         { _id: args.idAvance },

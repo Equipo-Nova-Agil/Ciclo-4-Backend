@@ -14,14 +14,24 @@ const avanceSchema = new Schema({
     ref: ModeloProyectos,
     required: true,
   },
+
   descripcion: {
     type: String,
     required: true,
   },
+
   observaciones: [
     {
-      type: String,
-    },
+      tipo: {
+        type: String,
+        enum: ['OBSERVACION'],
+        required: true,
+      },
+      descripcion: {
+         type: String,
+         required: true,
+       },
+     },
   ],
 
   creadoPor: {
