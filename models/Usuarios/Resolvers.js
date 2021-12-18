@@ -30,7 +30,7 @@ const resolversUsuario = {
       const usuario = await ModeloUsuarios.findOne({ _id: args._id }).populate([
             {
               path: 'inscripciones',
-              populate: {
+              populate: { 
                 path: 'proyecto',
                 populate: [{ path: 'lider' }, { path: 'avances' }],
               },

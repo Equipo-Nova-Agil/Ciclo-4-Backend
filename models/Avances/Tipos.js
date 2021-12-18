@@ -39,6 +39,7 @@ type Avance {
     fecha: Date
     proyecto: String
     creadoPor: String
+    descripcion: String
     
   }
 
