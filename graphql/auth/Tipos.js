@@ -19,6 +19,10 @@ const tiposAutenticacion = gql`
 
     login(correo: String!, password: String!): Token
 
+    cambiarPassword(_id: String!, passwordActual: String!, passwordNuevo: String!): Token
+
+    resetPassword(correo: String!): Token
+
     refreshToken: Token
   }
 `;
