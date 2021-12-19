@@ -34,24 +34,34 @@ const resolversAutenticacion = {
     login: async (parent, args) => {
       const usuarioEcontrado = await ModeloUsuarios.findOne({ correo: args.correo });
       console.log('Usuario Encontrado', usuarioEcontrado);
-      if (await bcrypt.compare(args.password, usuarioEcontrado.password)) {
-        return {
-          token: generarToken({
-            _id: usuarioEcontrado._id,
-            nombre: usuarioEcontrado.nombre,
-            apellido: usuarioEcontrado.apellido,
-            identificacion: usuarioEcontrado.identificacion,
-            correo: usuarioEcontrado.correo,
-            rol: usuarioEcontrado.rol,
-            estado: usuarioEcontrado.estado,
-          }), 
-        };
-      }
-      else{
-        return{
-          error: 'Token Invalido',
+      //se encontro informacion
+      if (usuarioEcontrado) {
+        if (await bcrypt.compare(args.password, usuarioEcontrado.password)) {
+          return {
+            token: generarToken({
+              _id: usuarioEcontrado._id,
+              nombre: usuarioEcontrado.nombre,
+              apellido: usuarioEcontrado.apellido,
+              identificacion: usuarioEcontrado.identificacion,
+              correo: usuarioEcontrado.correo,
+              rol: usuarioEcontrado.rol,
+              estado: usuarioEcontrado.estado,
+            }),
+          };
+        } else {
+          return {
+            token:null,
+            error: "Token Invalido",
+          };
         }
       }
+      else{
+        return {
+          token:null,
+          error: "Usuario o contraseña errada",
+        };
+      }
+     
     },
   
 
