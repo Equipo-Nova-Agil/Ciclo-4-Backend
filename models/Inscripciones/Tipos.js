@@ -10,6 +10,13 @@ const tiposInscripcion = gql`
     estado: Enum_EstadoInscripcion!
   }
 
+  type Cuenta {
+    total: Int
+    pendientes: Int
+    abiertas: Int
+    cerradas: Int
+  }
+
   input FiltroInscripciones {
     _id: ID
     proyecto: String
@@ -21,6 +28,7 @@ const tiposInscripcion = gql`
   type Query {
     Inscripciones (filtro: FiltroInscripciones): [Inscripcion]
     InscripcionesPorProyecto(proyecto: String!): [Inscripcion]
+    CountInscripcionesPorProyecto(proyecto: String!, estudiante: String!) : Cuenta
   }
 
   type Mutation {

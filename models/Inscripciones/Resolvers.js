@@ -21,6 +21,15 @@ const resolverInscripciones = {
       const inscripcionesPorProyecto = await ModeloInscripciones.find({ proyecto: args.proyecto }).populate('proyecto').populate('estudiante');
       return inscripcionesPorProyecto;
     },
+    //REALIZADA POR DUHAN
+    CountInscripcionesPorProyecto: async (parent, args) => {
+      const total = await ModeloInscripciones.find({ proyecto: args.proyecto, estudiante: args.estudiante }).count() || 0;
+      const pendientes = await ModeloInscripciones.find({ proyecto: args.proyecto, estudiante: args.estudiante, estado:"PENDIENTE" }).count() || 0;
+      const abiertas = await ModeloInscripciones.find({ fechaEgreso: { $exists: false }, proyecto: args.proyecto, estudiante: args.estudiante, estado:"ACEPTADO" }).count() || 0;
+      const cerradas = await ModeloInscripciones.find({ fechaEgreso: { $exists: true }, proyecto: args.proyecto, estudiante: args.estudiante }).count() || 0;
+      return ({"total":total,"pendientes":pendientes,"abiertas":abiertas,"cerradas":cerradas});
+    },
+    // -----------------------------------------------------------
   },
   Mutation: {
     crearInscripcion: async (parent, args) => {
