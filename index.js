@@ -29,9 +29,9 @@ const server = new ApolloServer({
         return { userData };
       }
     }
-    // else{
-    //   res.send (401);
-    // }
+    else{
+      res.send (401);
+    }
     return null;
   },
 });
