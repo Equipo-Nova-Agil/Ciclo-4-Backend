@@ -26,10 +26,11 @@ const resolversAvance = {
         creadoPor: args.creadoPor,
       });
 
-      const avances = await ModeloAvances.find({ proyecto: avanceCreado.proyecto });
-      if (avances.length === 1) {
+      const avances = await ModeloAvances.find({ proyecto: args.proyecto });
+      console.log("Avances en proyecto",avances.length)
+      if (avances.length === 0) {
         const proyectoModificado = await ModeloProyectos.findOneAndUpdate(
-          { _id: avanceCreado.proyecto },
+          { _id: args.proyecto },
           {
             fase: 'DESARROLLO',
           }
